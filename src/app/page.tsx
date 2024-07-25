@@ -8,7 +8,7 @@ const Main = async () => {
   return (
     <>
       <BannerSection image_url={data.banner.banner_image}>
-        <div className="absolute inset-0 flex flex-col justify-end bg-gradient-to-t from-[#181818] px-[2rem] md:pl-[5.2rem] lg:justify-center xl:pl-[6.2rem]">
+        <div className="absolute inset-0 flex flex-col justify-end bg-gradient-to-t from-[#181818] px-[2rem] md:pl-[5.2rem] lg:justify-center xl:pl-[9rem]">
           <CSText size="21 md:35" color="white" weight="bold">
             {data.banner.title}
           </CSText>
