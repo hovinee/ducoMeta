@@ -1,11 +1,7 @@
-import Card from '@/components/card/Card'
 import DigitalSwiperSlider from '@/components/swiper/DigitalSwiperSlider'
 import CSText from '@/components/ui/text/CSText'
-import { getCareerCounseling } from '@/lib/data'
 
 const CareerCounselignPage = () => {
-  const data = getCareerCounseling()
-
   return (
     <main className="mx-auto mt-[8.4rem] w-full max-w-[140rem]">
       <DigitalSwiperSlider careerCounseling />
@@ -27,11 +23,6 @@ const CareerCounselignPage = () => {
         <CSText size="31" color="white" weight="bold" className="mt-[4rem]">
           진로상담심리 캠퍼스
         </CSText>
-        <section className="grid grid-cols-4 gap-12 py-[4rem]">
-          {data.map((content, index) => (
-            <Card key={index} content={content} />
-          ))}
-        </section>
       </section>
     </main>
   )
