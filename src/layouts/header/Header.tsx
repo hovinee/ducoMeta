@@ -5,7 +5,7 @@ import AutoSizeImage from '@/components/ui/auto-size-image/AutoSizeImage'
 import CSText from '@/components/ui/text/CSText'
 import { useSticky } from '@/hooks'
 import clsx from 'clsx'
-import { useSession } from 'next-auth/react'
+import { signOut, useSession } from 'next-auth/react'
 
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
@@ -24,6 +24,7 @@ const Header = () => {
   )
 
   const handleLogout = () => {
+    signOut()
     setOpenMenu(false)
   }
 
