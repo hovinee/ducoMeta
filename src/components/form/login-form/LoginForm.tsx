@@ -2,6 +2,7 @@
 
 import Link from 'next/link'
 import { useState } from 'react'
+import { signIn } from 'next-auth/react'
 import { useRouter } from 'next/navigation'
 
 import Image from 'next/image'
@@ -29,6 +30,25 @@ const SignInForm = () => {
   const handleSumit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     setLoading(true)
+    try {
+      const res = await signIn('credentials', {
+        email,
+        password,
+        redirect: false,
+      })
+      console.log(res)
+      if (res?.error) {
+        setLoading(false)
+        setError('올바른 비밀번호를 입력해주세요')
+        return
+      } else if (res?.ok) {
+        setLoading(false)
+        alert('로그인 되었습니다.')
+        router.replace('/')
+      }
+    } catch (error) {
+      console.log(error)
+    }
   }
   return (
     <Section className="m-auto w-[35rem] rounded-2xl border py-[2rem] xl:mx-0 xl:my-auto xl:ml-[15rem]">

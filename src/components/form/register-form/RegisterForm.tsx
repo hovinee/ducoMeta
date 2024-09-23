@@ -3,14 +3,19 @@
 import Link from 'next/link'
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
+
 import Image from 'next/image'
-import Agreement from './Agreement'
 import dynamic from 'next/dynamic'
+
 import CSText from '@/components/ui/text/CSText'
 import CSLabel from '@/components/ui/label/CSLabel'
 import CSInput from '@/components/ui/input/CSInput'
+import { UserModel } from '@/models/user'
 import Section from '@/components/ui/section/Section'
+
+import { validateEmail, validatePassword } from '@/utils/validation_front'
 import VerificationCode from './VerificationCode'
+import { postRegister, postValidationCode, postVerify } from '@/app/api/auth'
 import CSButton from '@/components/ui/button/CSButton'
 
 const Loading = dynamic(() => import('../../loading/Loading'))
@@ -31,14 +36,62 @@ const SignUpForm = () => {
   //로딩
   const [loading, setLoading] = useState<boolean>(false)
 
-  const handleVerificationCode = async () => {}
+  const handleVerificationCode = async () => {
+    const res = await postValidationCode(email)
+    const data = await res.json()
+
+    if (data.result === 1200) {
+      setAlreadyVerifiedCode(true)
+    } else if (data.result === 1000) {
+      setVerficationEnabled(true)
+    }
+  }
 
   const handleVerify = async () => {
     //TODO: try catch 문으로 로직 수정
+    const res = await postVerify(email, verificationCode)
+    const data = await res.json()
+    if (data.result === 1000) {
+      setVerifiedCode(true)
+    }
   }
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
+
+    if (
+      !name ||
+      validateEmail(email).error ||
+      validatePassword(password).error ||
+      verifiedCode == false ||
+      password !== passwordCheck
+    )
+      return alert('회원가입 정보를 확인해주세요')
+
+    try {
+      setLoading(true)
+      const newUser: UserModel = {
+        email: email,
+        name: name,
+
+        password: password,
+      }
+
+      const res = await postRegister(newUser)
+
+      if (res.ok) {
+        const form = e.target as HTMLFormElement
+        form.reset()
+        router.push('/')
+        setLoading(false)
+      } else {
+        setLoading(false)
+        console.log('User registration failed.')
+      }
+    } catch (error) {
+      console.log('Error during registration', error)
+      setLoading(false)
+    }
   }
 
   return (
@@ -79,7 +132,7 @@ const SignUpForm = () => {
             {verficationEnabled ? '재전송' : '인증'}
           </CSText>
         </CSLabel>
-        {email && (
+        {email && validateEmail(email).error && (
           <CSText
             size="11"
             weight="normal"
@@ -131,7 +184,9 @@ const SignUpForm = () => {
         <CSText
           size="11"
           weight="normal"
-          color={password ? 'red' : '00A886'}
+          color={
+            password && validatePassword(password).error ? 'red' : '00A886'
+          }
           className="font-inter mt-[0.5rem]"
         >
           비밀번호는 8-20 이하의 영문+숫자 조합입니다.
