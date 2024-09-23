@@ -5,6 +5,7 @@ import AutoSizeImage from '@/components/ui/auto-size-image/AutoSizeImage'
 import CSText from '@/components/ui/text/CSText'
 import { useSticky } from '@/hooks'
 import clsx from 'clsx'
+import { useSession } from 'next-auth/react'
 
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
@@ -12,7 +13,7 @@ import { useState } from 'react'
 
 const Header = () => {
   const path = usePathname()
-
+  const { data: user } = useSession()
   const { sticky, measuredRef } = useSticky()
   const [openMenu, setOpenMenu] = useState<boolean>(false)
 
@@ -37,7 +38,7 @@ const Header = () => {
         <div className="flex flex-col items-center gap-[1rem] md:flex-row">
           <MainMenu />
           <div className="hidden md:block">
-            {false ? (
+            {user ? (
               <div className="relative">
                 <AutoSizeImage
                   src={'/images/my_profile.png'}
@@ -46,14 +47,6 @@ const Header = () => {
                 />
                 {openMenu && (
                   <ul className="absolute right-full w-[15rem] bg-white pt-[1rem] shadow-lg">
-                    <Link href="/my-info">
-                      <li
-                        className="cursor-pointer border-b py-[0.5rem] text-center text-16 hover:opacity-75"
-                        onClick={() => setOpenMenu(false)}
-                      >
-                        마이페이지
-                      </li>
-                    </Link>
                     <Link href="/">
                       <li
                         className="cursor-pointer border-b py-[0.5rem] text-center text-16 hover:opacity-75"

@@ -6,6 +6,7 @@ import Header from '@/layouts/header/Header'
 import { Noto_Sans_KR, Roboto } from 'next/font/google'
 import { headers } from 'next/headers'
 import clsx from 'clsx'
+import AuthProvider from '@/contexts/AuthProvider'
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://pathfinder-bice-eta.vercel.app/'),
@@ -47,9 +48,11 @@ export default function RootLayout({
           cls(notoSansKr.className, roboto.variable),
         )}
       >
-        <Header />
-        {children}
-        <Footer />
+        <AuthProvider>
+          <Header />
+          {children}
+          <Footer />
+        </AuthProvider>
       </body>
     </html>
   )
