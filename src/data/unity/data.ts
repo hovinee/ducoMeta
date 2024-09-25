@@ -20,6 +20,12 @@ export const thumbnailCounseling = [
 
 export const EDUCATIONS = [
   {
+    id: '66a08050b42a370549b375d5',
+    thumbnail_image: '/images/unity/education/image_3.png',
+    title: 'Plaza',
+    sub_title: 'AI 기반 메타버스 상에서 다양한 활동과 이벤트가 열리는 플라자',
+  },
+  {
     id: '66a08063b42a370549b375d6',
     thumbnail_image: '/images/unity/education/image_1.png',
     title: 'Auditorium',
@@ -30,11 +36,5 @@ export const EDUCATIONS = [
     thumbnail_image: '/images/unity/education/image_2.png',
     title: 'Meeting Room',
     sub_title: 'AI 기반 메타버스 상에서 소규모 토론과 회의를 진행하는 회의실',
-  },
-  {
-    id: '66a08050b42a370549b375d5',
-    thumbnail_image: '/images/unity/education/image_3.png',
-    title: 'Plaza',
-    sub_title: 'AI 기반 메타버스 상에서 다양한 활동과 이벤트가 열리는 플라자',
   },
 ]
