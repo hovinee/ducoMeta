@@ -57,13 +57,11 @@ const CounselPage = () => {
   //   }
   // }, [addEventListener, removeEventListener])
 
+  const isEnd = loadingProgression * 100 === 100
   return (
     <div className="absolute inset-0 z-10 bg-black">
-      {/* <div
-        className={clsx(
-          'fixed z-20 h-full w-full',
-          splashEnd ? 'hidden' : 'block',
-        )}
+      <div
+        className={clsx('fixed z-20 h-full w-full', isEnd ? 'hidden' : 'block')}
       >
         <AutoSizeImage
           src={'/images/unity/loading_bg_2.jpg'}
@@ -72,7 +70,7 @@ const CounselPage = () => {
           objectCover
         />
         <Progressbar number={Math.round(loadingProgression * 100)} />
-      </div> */}
+      </div>
 
       <div className="relative h-full w-full">
         <Unity
@@ -81,8 +79,8 @@ const CounselPage = () => {
             height: '100%',
             justifySelf: 'center',
             alignSelf: 'center',
-            // opacity: splashEnd ? 100 : 0,
-            // transition: 'opacity 1s ease',
+            opacity: isEnd ? 100 : 0,
+            transition: 'opacity 1s ease',
           }}
           unityProvider={unityProvider}
         />
