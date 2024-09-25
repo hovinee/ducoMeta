@@ -9,9 +9,10 @@ import clsx from 'clsx'
 import AuthProvider from '@/contexts/AuthProvider'
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://pathfinder-bice-eta.vercel.app/'),
-  title: '랩키드 패스파인더GPT',
-  description: '안녕하세요 "랩키드 패스파인더GPT"에 오신 것을 환영합니다.',
+  metadataBase: new URL('https://duco-meta.vercel.app/'),
+  title: '예비심리상담사 교육동',
+  description:
+    '안녕하세요 예비심리상담사를 위한 교육동에 오신 것을 환영합니다.',
   icons: {
     icon: '/favicon.ico',
   },
