@@ -3,4 +3,4 @@ export const getBaseUrl =
     ? 'http://localhost:3000'
     : 'https://pathfinder-bice-eta.vercel.app'
 
-export const cfWorkerUrl = 'https://worker-lms2024-stage.team3.workers.dev'
+export const cfWorkerUrl = 'https://ducometa-worker.team3.workers.dev'

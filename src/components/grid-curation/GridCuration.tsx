@@ -10,7 +10,7 @@ import { useRouter } from 'next/navigation'
 const GridCuration = () => {
   const { data: user } = useSession()
   const router = useRouter()
-  console.log(user)
+
   return (
     <div className="grid grid-cols-1 gap-[1.5rem] border-b pb-[5rem] md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
       {EDUCATIONS.map((education, index) => (
