@@ -20,9 +20,10 @@ const GridCuration = () => {
               <div
                 onClick={() => {
                   if (!user) return alert('로그인을 해주세요.')
-                  if (index === 1 || index === 2)
-                    return alert('서비스 준비중 입니다.')
-                  router.push(`/education/${education.id}`)
+                  if (index === 0)
+                    return router.push(`/education/${education.id}`)
+                  if (index === 1) return router.push('/auditorium')
+                  if (index === 2) return alert('서비스 준비중 입니다.')
                 }}
               >
                 <motion.div
